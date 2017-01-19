@@ -93,21 +93,13 @@ context: |-
 
     .. class:: text-justify
 
-        Task and problems context descriptions can be formatted using reStructuredText syntax and |latex| syntax for mathematical expressions. Please refer to both their documentation to find out the full set of features.
+        Task and problems context descriptions can be formatted using reStructuredText syntax and :math:`\LaTeX` syntax for mathematical expressions. Please refer to both their documentation to find out the full set of features.
 
-        .. |latex| raw:: latex html
-
-            \( \LaTeX \)
-
-        |latex| expressions can be inserted via the following snippet:
+        :math:`\LaTeX` expressions can be inserted via the following snippet:
 
         .. code-block:: rst
 
-           This is a |my_expression| expression !
-
-           .. |my_expression| raw:: latex html
-
-              \( \LaTeX \)
+            This is a :math:`\LaTeX` expression !
 
         Syntax-highlighted code blocks can be inserted via the following snippet and CodeMirror language identifiers:
 
