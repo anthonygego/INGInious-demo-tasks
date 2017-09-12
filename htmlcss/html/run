@@ -1,0 +1,37 @@
+#!/bin/python3
+
+import os, subprocess, shlex, json
+from inginious import feedback, rst, input
+from parser import HTMLExpander
+from answer import expected_answer
+
+# Parse template
+input.parse_template("thecode.html.tpl", "thecode.html")
+
+# Validity check
+p = subprocess.Popen(shlex.split("java -jar /opt/vnu/vnu.jar --format json thecode.html"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+output = p.communicate()[0].decode('utf-8')
+# If compilation failed, exit with "failed" result
+if p.returncode:
+    feedback.set_global_result("failed")
+    feedback.set_global_feedback("Your code is not valid HTML. Here are the errors:\n\n")
+    try:
+        results = json.loads(output)
+        for result in results["messages"]:
+            feedback.set_global_feedback("- " + result["message"] + " Lines " + str(result.get("firstLine", result.get("lastLine", ""))) + "-" + str(result.get("lastLine", "")) + ", near:", True)
+            feedback.set_global_feedback(rst.indent_block(1, rst.get_codeblock("html", result["extract"]), "  "), True)
+    except:
+        feedback.set_global_feedback("Something went wrong :-(")
+    exit(0)
+
+# Check the actual content
+data = open('thecode.html', 'r').read()
+parser = HTMLExpander()
+parser.feed(data)
+answer = parser.get_result()
+
+if not answer == expected_answer:
+    feedback.set_global_result("failed")
+    feedback.set_global_feedback("Your HTML code is valid but it does not respect the specs.")
+
+feedback.set_global_result("success")

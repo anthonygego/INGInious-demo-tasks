@@ -1,0 +1,78 @@
+accessible: true
+author: ''
+context: |-
+    *This text and example come from* `tutorialpoints <https://www.tutorialspoint.com/html/html_attributes.htm>`_.
+
+    We have seen few HTML tags and their usage like heading tags ``<h1>``, ``<h2>``, paragraph tag ``<p>`` and other tags. We used them so far in their simplest form, but most of the HTML tags can also have attributes, which are extra bits of information.
+
+    An attribute is used to define the characteristics of an HTML element and is placed inside the element's opening tag. All attributes are made up of two parts − a **name** and a **value**
+
+    - The **name** is the property you want to set. For example, the paragraph ``<p>`` element in the example carries an attribute whose name is ``align``, which you can use to indicate the alignment of paragraph on the page.
+    - The **value** is what you want the value of the property to be set and always put within quotations. The below example shows three possible values of align attribute: ``left``, ``center`` and ``right``.
+
+    Attribute names and attribute values are case-insensitive. However, the World Wide Web Consortium (W3C) recommends lowercase attributes/attribute values in their HTML 4 recommendation.
+
+    Example
+    ```````
+
+    .. code-block:: html
+
+        <!DOCTYPE html>
+        <html>
+           <head>
+              <title>Align Attribute  Example</title>
+           </head>
+           <body>
+              <p align="left">This is left aligned</p>
+              <p align="center">This is center aligned</p>
+              <p align="right">This is right aligned</p>
+           </body>
+        </html>
+
+    How does this exercise work ?
+    ``````````````````````````````
+
+    In this exercise, the student is asked to provide a ``<div/>`` container whose ``class`` attribute is ``alert`` and containing ``Hello World!`` as text. The answer is checked as follows:
+
+    #. The HTML code is put inside a basic page template :
+
+       .. code-block:: html
+
+            <!DOCTYPE html>
+            <html>
+                <head>
+                    <title>A new page</title>
+                </head>
+                <body>
+            @    @thecode@@
+                </body>
+            </html>
+
+       Where ``thecode`` is the problem identifier and will be replaced by the actual HTML code.
+    #. The generated file is checked using the v.Nu HTML Checker (the same used by W3C website) to provide some feedback on syntax errors.
+    #. Once the HTML code is valid, it is semantically checked by comparing the produced tree using the embedded Python HTMLParser.
+
+    This exercise is designed only to tell the students if his submission is correct. It will not give any clue on how to solve any issue. This can be done by doing additionnal comparisons on the tree.
+environment: htmlcss
+evaluate: best
+groups: false
+limits:
+    memory: '512'
+    output: '2'
+    time: '30'
+name: HTML attributes
+network_grading: false
+order: 0
+problems:
+    thecode:
+        language: html
+        name: Declaring a div container with an attribute
+        type: code
+        header: Consider you're editing the body of your HTML document. Declare a
+            new ``div`` container which ``class`` attribute is ``alert`` and content
+            is ``Hello World!``.
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

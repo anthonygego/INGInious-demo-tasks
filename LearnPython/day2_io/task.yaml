@@ -1,0 +1,315 @@
+accessible: true
+author: Anthony Gégo
+context: ''
+environment: mcq
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Day 2 - Input/output and exceptions
+network_grading: false
+order: 6
+problems:
+    mcq1:
+        choices:
+        -   text: IEEE754 do not ensure that 0.4/9==0.4/9
+        -   text: '*str* function do some preformating for human readilibity while
+                *repr* function make parseable strings'
+            valid: true
+        limit: 0
+        name: str/repr functions
+        header: |-
+            How can you explain this ?
+
+            .. code-block:: python
+
+                >>>> float(repr(0.4/9))==0.4/9
+                True
+                >>> float(str(0.4/9))==0.4/9
+                False
+        type: multiple-choice
+    mcq2:
+        choices:
+        -   text: |-
+                .. code-block:: python
+
+                    for x in range(1,20,2):
+                        stri='*'*x
+                        print stri.center(19)
+            valid: true
+        -   text: |-
+                .. code-block:: python
+
+                    for x in range(1,20,2):
+                        stri='*'*x
+                        print stri.zfill(19)
+        -   text: |-
+                .. code-block:: python
+
+                    for x in range(1,20,2):
+                        stri='*'*x
+                        print stri.rjust(19)
+        type: multiple-choice
+        limit: 0
+        name: String formatting with methods
+        header: |-
+            You are asked to draw a centered pyramid in the Python console made of '*' characters, with a base of size 19.
+
+            .. code-block::
+
+                         *
+                        ***
+                       *****
+                      *******
+                     *********
+                    ***********
+                   *************
+                  ***************
+                 *****************
+                *******************
+
+            Which of these code will you use to draw the pyramid above ?
+    mcq3:
+        header: |-
+            Select the Python codes that will result in printing the string:
+
+            .. code-block::
+
+                Duck Dodgers, in the 24th and a half century !
+        choices:
+        -   valid: true
+            text: |-
+                .. code-block:: python
+
+                    print "{0[Name]:s}, in the {1}th and a half century !".format({"Name": "Duck Dodgers"}, 24)
+        -   text: |-
+                .. code-block:: python
+
+                    print "{0:s}, in the {1}th and a half century !".format("Duck Dodgers", 24)
+            valid: true
+        -   text: |-
+                .. code-block:: python
+
+                    print "{[Name]:s}, in the {1}th and a half century !".format({"Name": "Duck Dodgers"}, 24)
+        -   text: |-
+                .. code-block:: python
+
+                    print "{0[Name]:s}, in the {1:24d}th and a half century !".format({"Name": "Duck Dodgers"}, 24)
+        type: multiple-choice
+        name: String formatting with string.format()
+        limit: 4
+        multiple: true
+    mcq4:
+        choices:
+        -   valid: true
+            text: The file object is an iterator. If John wants to print the whole
+                content, he can iterate on each line or use the *read()* function.
+        -   text: John opened the file with write access only.
+        -   text: John has no read rights on the file.
+        type: multiple-choice
+        limit: 0
+        name: File reading
+        header: |-
+            John wants to open a text file and display its whole content on the terminal.
+
+            .. code-block:: python
+
+                f = open('file.txt','r')
+                print f
+
+            Unfortunately, his code doesn't work and prints something like :
+
+            .. code-block::
+
+                <openfile 'file.txt', mode 'r' at 80a1000>
+
+
+            Can you help him to find why ?
+    mcq5:
+        type: multiple-choice
+        choices:
+        -   valid: true
+            text: The *pickle* module provides the *dump* and *load* functions to
+                respectively pickle and unpickle Python objects.
+        -   text: 'Pickling works simply : Alan just need to pass its object as arguments
+                of *read* and *write* methods of file object.'
+        -   text: Pickling won't help him doing that. He needs to save all the entries
+                of its dictionary on a file, and then write a parser to restore the
+                state.
+        limit: 0
+        header: Alan stores the state of his game is a Python dictionary and wants
+            to save it on a file to resume the game later. He was told pickling could
+            help him but has no idea how to do that. What does Alan have to do ?
+        name: Pickling
+    mcq6:
+        name: Exceptions
+        choices:
+        -   valid: true
+            text: |+
+                .. code-block:: python
+
+                    try:
+                        radius = int(raw_input("Enter the radius of the circle :"))
+                        print "The circumference is : " + repr(2*radius*3.14)
+                    except ValueError:
+                        print "Invalid number !"
+
+        -   text: |
+                .. code-block:: python
+
+                    try:
+                        radius = raw_input("Enter the radius of the circle :")
+                        print "The circumference is : " + repr(2*radius*3.14)
+                    except ValueError:
+                        print "Invalid number !"
+        -   text: |-
+                .. code-block:: python
+
+                    try:
+                        radius = int(raw_input("Enter the radius of the circle :"))
+                    except ValueError:
+                        print "Invalid number !"
+                    print "The circumference is : " + repr(2*radius*3.14)
+        header: |-
+            Your friend has written the following program to compute the circumference of a circle of a given radius :
+
+            .. code-block:: python
+
+               radius = int(raw_input("Enter the radius of the circle :"))
+               print "The circumference is : " + repr(2*radius*3.14)
+
+            Unfortunately, the program crashes if something else than a number is entered in the console. You suggest your friend to catch the ValueError exception raised by the cast operation. How do you do that ?
+        limit: 0
+        type: multiple-choice
+    mcq7:
+        type: multiple-choice
+        choices:
+        -   text: The raised *ZeroDivisionError* is catched by the inner try/except
+                as it matches all kinds of exceptions.
+            valid: true
+        -   text: The string "0" cannot be cast into integer.
+        -   text: The string "12" cannot be cast into integer as it is of length >
+                1.
+        -   text: There is no division by zero. The "0" will be cast with its ASCII
+                equivalent number (48).
+        header: |-
+            John is really new in programming and wrote this code :
+
+            .. code-block:: python
+
+                def divide(a,b):
+                    try:
+                        if int(b)==0:
+                            raise ZeroDivisionError("Division by zero")
+                        return int(a)/int(b)
+                    except:
+                        print "String to int conversion error !"
+
+                try:
+                    print divide("12", "0")
+                except ZeroDivisionError:
+                    print "Division by zero !"
+
+            He just can't figure out why Python displays this :
+
+            .. code-block::
+
+                String to int conversion error !
+
+            while he's expecting a division by zero error. Can you help him ?
+        limit: 0
+        name: Raising exceptions
+    mcq8:
+        choices:
+        -   valid: true
+            text: |-
+                .. code-block::
+
+                    50
+                    Exiting divide()...
+                    division by zero
+                    Exiting divide()...
+        -   text: |-
+                .. code-block::
+
+                    50
+                    division by zero
+                    Exiting divide()...
+        -   text: |-
+                .. code-block::
+
+                    50
+                    Exiting divide()...
+                    division by zero
+        -   text: |-
+                .. code-block::
+
+                    50
+                    division by zero
+        limit: 0
+        header: |
+            Have a look at this piece of code :
+
+            .. code-block:: python
+
+                def divide(a,b):
+                    try:
+                        print a/b
+                    except ZeroDivisionError:
+                        print "division by zero"
+                    finally:
+                        print "Exiting divide()..."
+
+                divide(100,2)
+                divide(5,0)
+
+            What will be displayed ?
+        name: finally clause
+        type: multiple-choice
+    mcq9:
+        type: multiple-choice
+        choices:
+        -   text: Exception is more general than ValueError and Python executes the
+                code after the first matching *except* clause.
+            valid: true
+        -   text: The exception raised is different of *ValueError* because a string
+                is explicitly passed as an argument to *int()*
+        -   text: Exception is more general than ValueError and Python executes the
+                code after all matching *except* clauses in a internally-defined order.
+        limit: 0
+        header: |-
+            Consider the following code :
+
+            .. code-block:: python
+
+                try:
+                    error = int("a")
+                except Exception:
+                    print "Unhandled exception."
+                except ValueError:
+                    print "Invalid number."
+
+            This raise a ValueError but always prints "Unhandled exception." Can you explain why ?
+        name: Exception matching order
+    mcq10:
+        type: multiple-choice
+        choices:
+        -   valid: true
+            text: 'True'
+        -   text: 'False'
+        limit: 0
+        name: with statement
+        header: |-
+            The following code will ensure that file *f* is closed if an error happen during reading :
+
+            .. code-block:: python
+
+                with open("file.txt") as f:
+                    data = f.read()
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

@@ -1,0 +1,222 @@
+accessible: true
+author: Anthony Gégo
+context: ''
+environment: mcq
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: 'Day 3 - Standard library : Part 1'
+network_grading: false
+order: 9
+problems:
+    mcq1:
+        choices:
+        -   valid: true
+            text: |-
+                .. code-block:: python
+
+                   for thefile in os.walk(os.getcwd())
+                       print thefile[0]
+        -   text: |-
+                .. code-block:: python
+
+                   os.system("ls -R -1a " + os.getcwd())
+            feedback: Python os module offers cross-platform facilities that aren't
+                used here.
+        -   text: |-
+                .. code-block:: python
+
+                   os.system("ls -R -1a")
+            feedback: Python os module offers cross-platform facilities that aren't
+                used here.
+        -   feedback: Python os module offers cross-platform facilities that aren't
+                used here.
+            text: |-
+                .. code-block:: python
+
+                   os.system("dir /s /b " + os.getcwd())
+        limit: 0
+        name: Listing files
+        header: Steve wants to list all the files and folder in in the current working
+            directory. Using the ``os`` module, which of the following code will you
+            suggest ?
+        type: multiple-choice
+    mcq2:
+        type: multiple-choice
+        limit: 0
+        choices:
+        -   valid: true
+            text: Here only the ``*.o`` file will be ignored but not all files of
+                this pattern.
+        -   text: The ``ignore`` keyword argument takes a string.
+        -   text: '``shutil.copytree`` won''t ignore anything because ``ignore`` keyword
+                argument is not used by the function.'
+        header: |-
+            Mark is used to build his programs in the same folder than the sources and want to make a copy of these files excluding all ``*.o`` files. He tried the following using ``shutil`` module that don't work at all :
+
+            .. code-block:: python
+
+                shutil.copytree(source,destination, ignore=lambda path,names : '*.o')
+
+            What is Mark doing wrong ?
+        name: Ignoring files while copying
+    mcq3:
+        header: |-
+            You are using ``sys`` module to fetch the program argument of your script ``script.py``. Your launch your program with th following arguments :
+
+            .. code::
+
+                python script.py first second third
+
+            What value ``sys.argv[0]`` will take ?
+        type: multiple-choice
+        choices:
+        -   text: '``python``'
+        -   text: '``script.py``'
+            valid: true
+        -   text: '``first``'
+        name: Arguments
+        limit: 0
+    mcq4:
+        choices:
+        -   valid: true
+            text: Ada still need to parse arguments for OptionParser to set variables.
+        -   text: Ada put strings instead of variable identifiers in the keyword argument
+                ``dest`` of ``parser.add_option``.
+        -   text: The correct syntax is ``optparser.hostname`` and ``optparser.port``
+        header: |-
+            Ada wanted to use ``optparse`` module to ease the argument parsing of her program. She wrote the following test code but can't manage to display the options passed in arguments :
+
+            .. code-block:: python
+
+               parser = optparse.OptionParser("usage: %prog [options] arg1 arg2")
+
+               parser.add_option("-H", "--host", dest="hostname",
+                                 default="127.0.0.1", type="string",
+                                 help="hostname to run on")
+               parser.add_option("-p", "--port", dest="portnum", default=80,
+                                 type="int", help="port number to run on")
+
+               print "Hostname :", hostname
+               print "Port", port
+
+            What is she doing wrong ?
+        type: multiple-choice
+        limit: 0
+        name: Improved arguments
+    mcq5:
+        choices:
+        -   text: I need to call ``f.close()``.
+            valid: true
+        -   text: I need to store the filename ``f.name``, then close the file with
+                ``f.close()`` and eventually remove the file via ``os.remove(filename)``.
+        -   text: I need to call ``f.close()`` and then ``f.remove()``.
+        limit: 0
+        type: multiple-choice
+        name: Temporary files
+        header: |-
+            You opened a temporary file this manner using ``tempfile`` module :
+
+            .. code:: python
+
+              f=tempfile.TemporaryFile(prefix=sys.argv[0]+"_", suffix="tmp", dir="/tmp/python")
+
+            How will you delete this file ?
+    mcq6:
+        choices:
+        -   valid: true
+            text: '``RotatingFileHandler`` enables to produce a log file of fixed
+                size which will roll over when reaching a certain size.'
+        -   text: A formatting layer can be added to the handler.
+            valid: true
+        -   valid: true
+            text: '``NTEventLogHandler`` enables to put messages into the Windows
+                logging service.'
+        -   text: Using a logging handler is mandatory to produce logs with ``logging``
+                module.
+        name: Logging
+        header: Check the correct sentences about the ``logging`` module handlers.
+        multiple: true
+        limit: 0
+        type: multiple-choice
+    mcq7:
+        header: Steve is a stunned man and wants to use ``os.system("ls -R -1a")``
+            to list his files. He wants to store the result in a list but the function
+            only returns an exit code. How could he reach his goal using the ``subprocess``
+            module ?
+        type: multiple-choice
+        choices:
+        -   valid: true
+            text: |-
+                .. code-block:: python
+
+                   output = subprocess.Popen(["ls","-R", "-1a"], stdout=subprocess.PIPE).communicate()[0]
+                   files = output.splitlines()
+        -   text: |-
+                .. code-block:: python
+
+                   output = subprocess.Popen(["ls","-R", "-1a"]).communicate()[0]
+                   files = output.splitlines()
+        -   text: |-
+                .. code-block:: python
+
+                   output = subprocess.Popen(["ls","-R", "-1a"], stdout=subprocess.STDOUT).communicate()[0]
+                   files = output.splitlines()
+        name: Subprocesses
+        limit: 0
+    mcq8:
+        choices:
+        -   valid: true
+            text: '``check_call`` raises this exception because the exit code is different
+                from ``0``.'
+        -   feedback: Indeed, there is a option error. But error happening here does
+                not directly depend on this error.
+            text: There is an option error in the ``ls`` call. This should be ``--help``.
+        -   text: The ``check_call`` method is invalid, it should be ``call``.
+        name: (Check) calls
+        limit: 0
+        header: |-
+            Tim is launching an ``ls`` this way :
+
+            .. code-block:: python
+
+             subprocess.check_call(["ls","--Help"])
+
+            He always get an ``CalledProcessError`` exception. What's going wrong ?
+        type: multiple-choice
+    mcq9:
+        type: multiple-choice
+        choices:
+        -   text: 'Yes'
+        -   text: 'No'
+            valid: true
+        limit: 0
+        name: System I/O
+        header: Is ``print`` equivalent to ``sys.stdout.write`` from the ``sys`` module
+            ?
+    mcq10:
+        type: multiple-choice
+        choices:
+        -   text: '``os.path.split`` returns a list of length corresponding to the
+                directory tree height from the root ``/`` to the filepath passed as
+                an argument.'
+        -   text: '``os.path.abspath`` returns the path of the file passed as argument
+                from the root `/`.'
+            valid: true
+        -   text: '``os.path.join`` is equivalent to adding a ``/`` character between
+                the items of its list arguments.'
+        -   valid: true
+            text: '``os.path.basename`` returns the filename and extension of the
+                file corresponding to the filepath passed as argument'
+        multiple: true
+        name: Paths
+        header: Check the correct sentences about ``os.path``.
+        limit: 0
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

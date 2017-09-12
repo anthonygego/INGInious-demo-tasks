@@ -1,0 +1,244 @@
+accessible: true
+author: Guillaume Derval, Anthony Gégo
+context: ''
+environment: mcq
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Day 2 - More data structures
+network_grading: false
+order: 5
+problems:
+    lists-append:
+        choices:
+        -   valid: true
+            text: a[len(a):] = [x]
+        -   text: a[-1:] = [x]
+        -   text: a[:len(a)] = [x]
+        -   text: a[len(a):] = x
+        -   text: a[-1:0] = [x]
+        -   text: a[-1:] = x
+        header: Give all the equivalent way of writing the function ``a.append(x)``,
+            where ``a`` is a list,  using slice notation.
+        multiple: true
+        name: Append a list
+        type: multiple-choice
+        limit: 0
+    lists-insert:
+        choices:
+        -   text: a[i:i+1] = x
+        -   text: a[i:i+1] = [x]
+        -   text: a[i:i] = x
+        -   text: a[i:i] = [x]
+            valid: true
+        -   valid: true
+            text: a = a[:i] + [x] + a[i:]
+        name: Insert in a list
+        limit: 0
+        header: Give all the equivalent way of writing the function ``a.insert(i,
+            x)``, where ``a`` is a list,  using slice notation.
+        type: multiple-choice
+        multiple: true
+    lists-complexity:
+        choices:
+        -   text: That's wrong, the complexity of ``insert`` is ``O(1)`` because it's
+                a list.
+        -   text: It must iterate over each element of the linked list until it is
+                at desired position (``O(n)``). It then change a pointer, adding a
+                new entry (in ``O(1)``).
+        -   text: A list is in fact an array, and each element after the position
+                on which the element is inserted must be pushed back.
+            valid: true
+        header: Why is the complexity of ``list.insert`` ``O(n)``?
+        limit: 0
+        type: multiple-choice
+        name: Complexity
+    lists-comp:
+        choices:
+        -   text: '[elem for l in a for elem in l]'
+            valid: true
+        -   text: '[elem for elem in l for l in a]'
+        -   text: 'reduce(lambda x,y: x+y, a)'
+            valid: true
+        -   text: 'reduce(lambda x,y: [x]+y, a)'
+        multiple: true
+        header: Starting from a list of list (e.g. ``a=[[1,2,3],[4,5,6],[7,8,9]]``),
+            select all the possible ways of flattening it (``[1,2,3,4,5,6,7,8,9]``).
+        limit: 0
+        name: List comprehensions
+        type: multiple-choice
+    mcq5:
+        choices:
+        -   text: Tuples are immutable in Python. Bill should have chosen another
+                data structure or replaced the whole tuple.
+            valid: true
+        -   text: The way to access tuple entries is pos(0) and not pos[0]
+        -   text: This would work if Bill wrote ``pos[0] += x_increment`` instead
+        limit: 0
+        type: multiple-choice
+        header: |
+            Bill is programming a new game and decided to use (x,y) tuples, where *x* and *y* are integers, for the coordinates of its sprites. But when implementing an horizontal move function, Bill faced an error.
+
+            .. code-block:: python
+
+                def move_horizontally(pos, x_increment):
+                    # pos is a (x,y) tuple, x_increment is the amount by which moving unit
+                    pos[0] = pos[0] + x_increment
+
+            What is he doing wrong ?
+        name: Tuples
+    mcq6:
+        name: Sets
+        choices:
+        -   valid: true
+            text: Yes, Richard has no need to get an ordered list, so he can use a
+                set instead which will prevent him for checking at each iteration
+                if the current answer is in the set.
+        -   text: No, there is no better way to do that.
+        header: |-
+            Richard wants to list all the operating system used by people he polled.  Here's the code he used :
+
+            .. code-block:: python
+
+                os_list = list()
+                for answer in answers:
+                    if answer not in os_list:
+                        os_list.append(answer)
+
+            Is there a better way to do that ?
+        limit: 0
+        type: multiple-choice
+    mcq7:
+        choices:
+        -   valid: true
+            text: |-
+                .. code-block:: python
+
+                    my_list = [('orange', 3), ('apple', 5), ('pear', 4)]
+        -   text: |-
+                .. code-block:: python
+
+                    my_list = [('orange': 3), ('apple': 5), ('pear': 4)]
+        -   text: |-
+                .. code-block:: python
+
+                    my_list = ['orange': 3, 'apple': 5, 'pear': 4]
+        -   text: |-
+                .. code-block:: python
+
+                    my_list = [['orange', 3], ['apple', 5], ['pear', 4]]
+        name: Dictionaries
+        type: multiple-choice
+        header: |-
+            Consider the following piece of code:
+
+            .. code-block:: python
+
+                >>> my_list = # missing code
+                >>> my_dict = dict(my_list)
+                >>> print my_dict
+                {'orange': 3, 'pear': 4, 'apple': 5}
+
+            What could be the missing line for this code to work ?
+        limit: 0
+    mcq8:
+        choices:
+        -   valid: true
+            text: |-
+                .. code-block:: python
+
+                    for k, d in users.iteritems():
+                        print k, ":", d[0], d[1]
+        -   text: |-
+                .. code-block:: python
+
+                    for k, d in iteritems(users):
+                        print k, ":", d[0], d[1]
+        -   text: |-
+                .. code-block:: python
+
+                    for k, d in users:
+                        print k, ":", d[0], d[1]
+        header: |-
+            Consider the following declaration :
+
+            .. code-block:: python
+
+                users = {
+                    "user1": ('User 1', 'user1@test.com'),
+                    "user2": ('User 2', 'user2@test.com')
+                }
+
+            What should we write to get the lookalike output :
+
+            .. code-block::
+
+              user2 : User 2 user2@test.com
+              user1 : User 1 user1@test.com
+        name: Tuples, dictionaries, iterations
+        limit: 0
+        type: multiple-choice
+    mcq9:
+        type: multiple-choice
+        choices:
+        -   text: |-
+                .. code-block:: python
+
+                    zip(articles, qties)
+            valid: true
+        -   text: |-
+                .. code-block:: python
+
+                    [articles, qties]
+        -   text: |-
+                .. code-block:: python
+
+                    articles, qties
+        -   text: |-
+                .. code-block:: python
+
+                    articles.zip(qties)
+        limit: 0
+        name: Zipping
+        header: |-
+            Steve has written a small e-commerce website and his HTML form is made such that he receives the following lists :
+
+            .. code-block:: python
+
+               articles = ["ART123", "ART456", "ART789"]
+               qties = [1, 3, 10]
+
+            He wants to generate a clean bill, and found this broken code :
+
+            .. code-block:: python
+
+                print "Article".ljust(10), '|', 'Quantity'.rjust(10)
+                print '-'*23
+                for article, qty in #missing code:
+                    print article.ljust(10), '|', str(qty).rjust(10)
+
+            What could be the missing code ?
+    mcq10:
+        type: multiple-choice
+        choices:
+        -   valid: true
+            text: '[1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]'
+        -   text: '[5, 10, 15]'
+        -   text: This code will crash
+        -   text: '[1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3]'
+        name: Operators on lists
+        header: |-
+            What is the output of this code ?
+
+            .. code-block:: python
+
+                print [1, 2, 3]*5
+        limit: 0
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

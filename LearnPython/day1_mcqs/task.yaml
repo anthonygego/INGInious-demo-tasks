@@ -1,0 +1,291 @@
+accessible: true
+author: Anthony Gégo
+context: ''
+environment: mcq
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Day 1 - Simple data structures
+network_grading: false
+order: 0
+problems:
+    qcm1:
+        choices:
+        -   valid: true
+            text: |-
+                .. code-block::
+
+                    # This is a comment
+                    for i in range(0,5):
+                        print i
+        -   valid: true
+            text: |-
+                .. code-block::
+
+                    for i in range(0,5):
+                        print i # This is a comment
+        -   text: |-
+                .. code-block::
+
+                    for i in range(0,5):
+                        print "#This is a comment"
+        limit: 3
+        type: multiple-choice
+        multiple: true
+        header: Check the snippets which contain a valid comment.
+        name: Comments in Python
+    qcm2:
+        choices:
+        -   valid: true
+            text: |-
+                .. code-block:: python
+
+                  >>> 42==42
+                  True
+        -   text: |-
+                .. code-block:: python
+
+                  >>> 0.15*3==0.45
+                  True
+        -   text: |-
+                .. code-block:: python
+
+                  >>> 7/3
+                  2.3333333333333335
+        -   text: |-
+                .. code-block:: python
+
+                  >>> 3.0/2
+                  1.5
+            valid: true
+        -   text: |-
+                .. code-block:: python
+
+                  >>> 9/4
+                  2
+            valid: true
+        name: Operations with numbers
+        multiple: true
+        limit: 5
+        type: multiple-choice
+        header: Which of the following statements are correct ?
+    qcm3:
+        type: multiple-choice
+        choices:
+        -   text: '"This is a string"'
+        -   text: '"A string with a \\" escaped char"'
+        -   valid: true
+            text: '''I didn''t check my code'''
+        -   text: '"I''m coding in Python"'
+        header: Select the wrongly declared string.
+        limit: 0
+        name: String declaration
+    qcm4:
+        choices:
+        -   valid: true
+            text: '''33333'''
+        -   text: '15'
+        -   text: '''15'''
+        -   text: '33333'
+        limit: 0
+        type: multiple-choice
+        header: |-
+            To which result will lead the following snippet of code ?
+
+            .. code-block:: python
+
+               print '3'*5
+        name: String or integer ?
+    qcm5:
+        name: Concatenation
+        choices:
+        -   valid: true
+            text: |-
+                .. code-block:: python
+
+                    >>> "Hello " + "world !"
+        -   text: |-
+                .. code-block:: python
+
+                    >>> "Hello ""world !"
+            valid: true
+        -   valid: true
+            text: |-
+                .. code-block:: python
+
+                    >>> "Hello "'world !'
+        -   text: |-
+                .. code-block:: python
+
+                    >>> "Hello "."world !"
+        -   text: |-
+                .. code-block:: python
+
+                    >>> 'Hello " + "world !'
+        type: multiple-choice
+        header: Which of the following expressions will result to the string "Hello
+            world!" ?
+        multiple: true
+        limit: 5
+    qcm6:
+        choices:
+        -   text: |-
+                .. code-block:: python
+
+                   >>> sentence[-1]
+                   '.'
+            valid: true
+        -   text: |-
+                .. code-block:: python
+
+                   >>> sentence[5:7]
+                   'is'
+            valid: true
+        -   text: |-
+                .. code-block:: python
+
+                   >>> sentence[-5:-7]
+                   'is'
+        -   text: |-
+                .. code-block:: python
+
+                   >>> sentence[0:10000]
+                   'This is a sentence.'
+            valid: true
+        -   text: |-
+                .. code-block:: python
+
+                   >>> sentence[8:18] + ', ' + sentence[0:7]
+                   'A sentence, this is.'
+        -   valid: true
+            text: |-
+                .. code-block:: python
+
+                   >>> sentence[0:7] + " Sparta!"
+                   'This is Sparta!'
+        header: |-
+            Given the following string declaration :
+
+            .. code-block:: python
+
+               >>> sentence = "This is a sentence."
+
+            Check the correct interpreter results :
+        name: String slicing
+        limit: 6
+        multiple: true
+        type: multiple-choice
+    qcm7:
+        choices:
+        -   text: |-
+                .. code-block:: python
+
+                    ['chicken', 'pork', 'beef', 'fish']
+        -   text: |-
+                .. code-block:: python
+
+                    ['eggs', 'flour', 1, 2]
+        -   text: |-
+                .. code-block:: python
+
+                    [0,2,2*2,2*3]
+        -   text: |-
+                .. code-block:: python
+
+                    [0,2] + [4,6,8]
+        -   text: |-
+                .. code-block:: python
+
+                    [0:2, 1:4, 2:8]
+            valid: true
+        limit: 0
+        header: One of the following list declarations is incorrect. Can you find
+            it ?
+        name: Lists declaration
+        type: multiple-choice
+    qcm8:
+        choices:
+        -   text: |-
+                .. code-block::
+
+                    [0, 1, 2, 3, 4, 5]
+            valid: true
+        -   text: |-
+                .. code-block::
+
+                    [1, 2, 3, 4, 5, 6]
+        -   text: |-
+                .. code-block::
+
+                    [0, 1, 2, 3, 4]
+        type: multiple-choice
+        limit: 0
+        name: More slicing
+        header: |-
+            Consider the following piece of code :
+
+            .. code-block:: python
+
+                l = [1, 6, 4, 5, 3, 2]
+                l = sorted(l)
+                l[0:2] = [0]
+                l[1:1] = [1,2]
+                l[5:7] = []
+                l.append(5)
+
+            What will the list *l* look like ?
+    qcm9:
+        choices:
+        -   valid: true
+            text: |-
+                .. code-block:: python
+
+                    m[1][2]
+        -   text: |-
+                .. code-block:: python
+
+                    m[2][1]
+        -   text: |-
+                .. code-block:: python
+
+                    m[6]
+        -   text: |-
+                .. code-block:: python
+
+                    m[2][3]
+        type: multiple-choice
+        header: |-
+            Consider the following nested list :
+
+            .. code-block :: python
+
+                m = [[1,2,3],[2,4,5],[6,7,8]]
+
+            How do you access to the element '5' ?
+        name: Nested lists
+        limit: 0
+    qcm10:
+        type: multiple-choice
+        choices:
+        -   valid: true
+            text: Python lists can contain elements of different types.
+        -   text: All nested lists must have the same size.
+        -   valid: true
+            text: Lists operators can also be used on strings.
+        -   text: Accessing an out-of-bound element on a list will return an empty
+                list.
+        -   valid: true
+            text: Specifying out-of-bound values for slicing will slice the list its
+                real end.
+        limit: 5
+        header: 'Check the correct sentences about Python lists :'
+        multiple: true
+        name: Nature of lists
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

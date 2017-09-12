@@ -1,0 +1,242 @@
+accessible: true
+author: Guillaume Derval
+context: |-
+    This exercice is sightly more complicated and tries to make you fall into some carefully-designed traps. You've been warned ;-)
+
+
+    Let's use this basic code:
+
+    .. code-block:: python
+
+        class A(object):
+            x = 1
+
+        class B(A):
+            x = 2
+
+        class C(A):
+            pass
+
+        class D(A):
+            def __init__(self):
+                self.x = 3
+
+        iA = A()
+        iB = B()
+        iC = C()
+        iD = D()
+
+        def print_status():
+            print "A.x=%i B.x=%i C.x=%i D.x=%i" % (A.x, B.x, C.x, D.x)
+            print "iA.x=%i iB.x=%i iC.x=%i iD.x=%i" % (iA.x, iB.x, iC.x, iD.x)
+environment: mcq
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Day 4 - Playing with static/instance variables
+network_grading: false
+order: 13
+problems:
+    one:
+        choices:
+        -   text: |-
+                ::
+
+                    A.x=1 B.x=2 C.x=1 D.x=1
+                    iA.x=1 iB.x=2 iC.x=1 iD.x=3
+            valid: true
+        -   text: |-
+                ::
+
+                    A.x=1 B.x=2 C.x=1 D.x=3
+                    iA.x=1 iB.x=2 iC.x=1 iD.x=3
+        -   text: |-
+                ::
+
+                    A.x=2 B.x=2 C.x=2 D.x=3
+                    iA.x=2 iB.x=2 iC.x=2 iD.x=3
+        -   text: |-
+                ::
+
+                    A.x=2 B.x=2 C.x=2 D.x=2
+                    iA.x=2 iB.x=2 iC.x=2 iD.x=3
+        name: A simple one
+        header: |
+            Given the initial code above, what is the output of:
+
+            .. code-block:: python
+
+                print_status()
+        limit: 0
+        type: multiple-choice
+    two:
+        choices:
+        -   text: |-
+                ::
+
+                    A.x=4 B.x=2 C.x=4 D.x=4
+                    iA.x=4 iB.x=2 iC.x=4 iD.x=3
+            valid: true
+        -   text: |-
+                ::
+
+                    A.x=4 B.x=2 C.x=1 D.x=1
+                    iA.x=1 iB.x=2 iC.x=1 iD.x=3
+        -   text: |-
+                ::
+
+                    A.x=4 B.x=2 C.x=1 D.x=1
+                    iA.x=4 iB.x=2 iC.x=1 iD.x=3
+        -   text: |-
+                ::
+
+                    A.x=4 B.x=2 C.x=4 D.x=4
+                    iA.x=4 iB.x=2 iC.x=1 iD.x=3
+        -   text: |-
+                ::
+
+                    A.x=4 B.x=2 C.x=4 D.x=4
+                    iA.x=1 iB.x=2 iC.x=1 iD.x=3
+        -   text: |-
+                ::
+
+                    A.x=4 B.x=4 C.x=4 D.x=4
+                    iA.x=4 iB.x=4 iC.x=4 iD.x=3
+        name: More complicated
+        header: |+
+            Take again the base code at the top of the page. What would be the output if we run:
+
+            .. code-block:: python
+
+                A.x = 4
+                print_status()
+
+        success_message: That's the right answer! When inheritance is done, static
+            variables are not (really) copied; instead, when looking for the variable
+            ``C.x`` for example, as the variable do not exists, it will check in the
+            parent, ``A.x``, and return ``4``.
+        limit: 0
+        type: multiple-choice
+    three:
+        choices:
+        -   text: |-
+                ::
+
+                    A.x=1 B.x=2 C.x=4 D.x=1
+                    iA.x=1 iB.x=2 iC.x=4 iD.x=3
+            valid: true
+        -   text: |-
+                ::
+
+                    A.x=4 B.x=2 C.x=4 D.x=4
+                    iA.x=4 iB.x=2 iC.x=4 iD.x=3
+        -   text: |-
+                ::
+
+                    A.x=4 B.x=2 C.x=4 D.x=1
+                    iA.x=4 iB.x=2 iC.x=4 iD.x=3
+        -   text: |-
+                ::
+
+                    A.x=4 B.x=2 C.x=4 D.x=1
+                    iA.x=1 iB.x=2 iC.x=4 iD.x=3
+        header: |
+            Let's reset your brain to the code at the top of the page (forget about ``A.x=4``).
+
+            What is the output of:
+
+            .. code-block:: python
+
+                C.x = 4
+                print_status()
+        type: multiple-choice
+        success_message: Indeed! When you set ``C.x`` to ``4``, it create a new static
+            variable into the class C (static variables are not copied when inheriting).
+            Then, when the function lookups for ``C.x``, it finds the new variable,
+            and do not need to go back to ``A.x``.
+        limit: 0
+        name: It's a trap!
+    four:
+        choices:
+        -   valid: true
+            text: |-
+                ::
+
+                    A.x=1 B.x=2 C.x=1 D.x=1
+                    iA.x=4 iB.x=2 iC.x=1 iD.x=3
+        -   text: |-
+                ::
+
+                    A.x=4 B.x=2 C.x=1 D.x=1
+                    iA.x=4 iB.x=2 iC.x=1 iD.x=3
+        -   text: |-
+                ::
+
+                    A.x=4 B.x=2 C.x=4 D.x=4
+                    iA.x=4 iB.x=2 iC.x=1 iD.x=3
+        -   text: |-
+                ::
+
+                    A.x=4 B.x=2 C.x=4 D.x=4
+                    iA.x=4 iB.x=2 iC.x=4 iD.x=3
+        header: |
+            Let's reset your brain to the code at the top of the page.
+
+            .. raw:: html
+
+                (Forget about everything you've seen before. Empty your mind.
+                <span style="font-size:6px"><a href="https://www.youtube.com/watch?v=tZQJhvs4amQ">Ok, not everything</a></span>)
+
+
+            What is the output of:
+
+            .. code-block:: python
+
+                iA.x = 4
+                print_status()
+        name: Empty your mind
+        type: multiple-choice
+        limit: 0
+    five:
+        limit: 0
+        choices:
+        -   valid: true
+            text: |-
+                ::
+
+                    A.x=1 B.x=2 C.x=1 D.x=1
+                    iA.x=1 iB.x=4 iC.x=1 iD.x=3
+        -   text: |-
+                ::
+
+                    A.x=1 B.x=4 C.x=1 D.x=1
+                    iA.x=1 iB.x=4 iC.x=1 iD.x=3
+        -   text: |-
+                ::
+
+                    A.x=4 B.x=4 C.x=4 D.x=4
+                    iA.x=1 iB.x=4 iC.x=1 iD.x=3
+        -   text: |-
+                ::
+
+                    A.x=4 B.x=4 C.x=4 D.x=4
+                    iA.x=4 iB.x=4 iC.x=4 iD.x=3
+        header: |
+            Again, take the code at the top of the page.
+
+            What is the output of:
+
+            .. code-block:: python
+
+                iB.x = 5
+                print_status()
+        name: Something something
+        type: multiple-choice
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

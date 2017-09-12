@@ -1,0 +1,43 @@
+accessible: true
+author: Guillaume Derval
+context: In this exercice, we will do some common operations on list, such as working
+    with indexes, appending items, searches in list, and many other things.
+environment: default
+evaluate: best
+groups: false
+limits:
+    output: '2'
+    time: '30'
+    memory: '100'
+name: Day 1 - Lists
+network_grading: false
+order: 3
+problems:
+    printingindices:
+        type: code
+        header: |-
+            Given a list, named ``the_list``:
+
+            * print the fourth element of the list
+            * print the last element of the list
+            * print the length of the list
+        language: python
+        name: Print
+    reverseandslice:
+        name: Reverse and slice
+        type: code
+        header: Reverse the list ``the_list`` and then put a slice of the reversed
+            list, from the second to the fourth position (included), in the variable
+            ``slice``.
+        language: python
+    sort:
+        name: Sort and print
+        type: code
+        language: python
+        header: Sort the list ``the_list``, and then print each element on a different
+            line.
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

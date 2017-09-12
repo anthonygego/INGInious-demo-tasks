@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+parsetemplate -o setsfile.py sets.py
+parsetemplate -o sortedfile.py sorted.py
+
+exercices_ok=0
+nb_exercices=2
+
+# Check first exercise   
+result=$(python setsfile.py)
+
+if [[ "$result" = "True" ]]; then
+    feedback --id sets --feedback "Well done !"
+    exercices_ok=$(($exercices_ok + 1))
+else
+    feedback --id sets --feedback "Your code didn't work !"
+fi
+    
+# Check second exercise
+result=$(python sortedfile.py)
+
+if [[ "$result" = "True" ]]; then
+    feedback --id sorted --feedback "Well done !"
+    exercices_ok=$(($exercices_ok + 1))
+else
+    feedback --id sorted --feedback "Your code didn't work !"
+fi
+
+amount_done=$(($exercices_ok*100/$nb_exercices))
+if [[ $exercices_ok -eq $nb_exercices ]]; then
+    feedback --result success --feedback "Well done !" --grade  $amount_done
+else
+    feedback --result failed --feedback "There are some error(s) in your answers" --grade  $amount_done
+fi

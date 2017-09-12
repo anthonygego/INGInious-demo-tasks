@@ -1,0 +1,45 @@
+#! /bin/bash
+
+exercices_ok=0
+nb_exercices=3
+
+echo -e "the_list = range(1, 20)\n" > student/printing_indices.py
+getinput printingindices >> student/printing_indices.py
+output=$(run_student python student/printing_indices.py)
+expected_output=$(printf "4\n19\n19")
+if [[ "$output" == "$expected_output" ]]; then
+	feedback --result success --feedback "Your answer is correct" --id printingindices
+    exercices_ok=$(($exercices_ok + 1))
+else
+	feedback --result failed --feedback "Wrong answer" --id printingindices
+fi
+
+echo -e "\nthe_list = [1, 3, 2, 4, 7, 6, 5, 8]\n" > student/reverseandslice.py
+getinput reverseandslice >> student/reverseandslice.py
+echo -e "\nprint slice == [5, 6, 7]\n" >> student/reverseandslice.py
+output=$(run_student python student/reverseandslice.py)
+expected_output=$(printf "True")
+if [[ "$output" == "$expected_output" ]]; then
+	feedback --result success --feedback "Your answer is correct" --id reverseandslice
+    exercices_ok=$(($exercices_ok + 1))
+else
+	feedback --result failed --feedback "Wrong answer. Remember that indexing begins at 0 and that you should take the slice from the *second* element to the *fourth* (**included**) $output" --id reverseandslice
+fi
+
+echo -e "the_list = [1, 3, 2, 4, 7, 6, 5, 8]\n" > student/sort.py
+getinput sort >> student/sort.py
+output=$(run_student python student/sort.py)
+expected_output=$(printf "1\n2\n3\n4\n5\n6\n7\n8\n")
+if [[ "$output" == "$expected_output" ]]; then
+	feedback --result success --feedback "Your answer is correct" --id sort
+    exercices_ok=$(($exercices_ok + 1))
+else
+	feedback --result failed --feedback "Wrong answer" --id sort
+fi
+
+amount_done=$(($exercices_ok*100/$nb_exercices))
+if [[ $exercices_ok -eq $nb_exercices ]]; then
+	feedback --result success --feedback "You solved all the exercices" --grade  $amount_done
+else
+	feedback --result failed --feedback "You made an error, see below" --grade     $amount_done
+fi

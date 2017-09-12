@@ -1,0 +1,60 @@
+#!/bin/python3
+
+import os, subprocess, shlex, json
+from inginious import feedback, rst, input
+from xml.etree import ElementTree
+import cssutils
+
+# Parse template
+css_content = input.get_input("thecode")
+with open("thecode.css", "w") as f:
+    f.write(css_content)
+
+# Validity check
+p = subprocess.Popen(shlex.split("java -jar /opt/css-validator/css-validator.jar --output=soap12 file:///task/thecode.css"), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+output = p.communicate()[0].decode('utf-8').split('\n', 1)[-1].rsplit('\n', 1)[0]
+
+root = ElementTree.fromstring(output)
+errorcount = int(root.find(".//{http://www.w3.org/2005/07/css-validator}errorcount").text.strip())
+if errorcount:
+    feedback.set_global_result("failed")
+    feedback.set_global_feedback("Your code is not valid CSS. Here are the errors:\n\n")
+    for error in root.findall(".//{http://www.w3.org/2005/07/css-validator}error"):
+        errortype = error.find(".//{http://www.w3.org/2005/07/css-validator}errortype").text
+        line = error.find(".//{http://www.w3.org/2005/07/css-validator}line").text
+        context = error.find(".//{http://www.w3.org/2005/07/css-validator}context").text
+        message = error.find(".//{http://www.w3.org/2005/07/css-validator}message").text
+        feedback.set_global_feedback("- " + errortype + " around line " + line + " , in context ``" + context + "`` " + rst.indent_block(1, rst.get_codeblock("", message), "  ") + " \n", True)
+    exit(0)     
+
+# Semantic check
+css = cssutils.parseString(css_content)
+expected_css = cssutils.parseFile("answer.css")
+
+def css_to_dict(css):
+    # Convert the cssutils parsed CSS to Python dict
+    result = {}
+    for rule in css.cssRules:
+        if isinstance(rule, cssutils.css.CSSStyleRule):
+            for selector in rule.selectorList:
+                selectorText = ""
+                for item in selector.seq:
+                    if not isinstance(item.value, cssutils.css.CSSComment):
+                        if isinstance(item.value, tuple): 
+                            selectorText += item.value[1]
+                        elif isinstance(item.value, str):
+                            selectorText += item.value.strip()
+                        else:
+                            selectorText += item.value.cssText
+                result[selectorText] = {prop.name: (prop.propertyValue.value, prop.priority) for prop in rule.style}
+    return result
+
+rules = css_to_dict(css)
+expected_rules = css_to_dict(expected_css)
+
+if not rules == expected_rules:
+    feedback.set_global_result("failed")
+    feedback.set_global_feedback("Your CSS code is valid but it does not respect the specs.")
+    exit(0)
+    
+feedback.set_global_result("success")

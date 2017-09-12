@@ -1,0 +1,64 @@
+accessible: true
+author: ''
+context: |-
+    *This text and example come from* `tutorialpoints <https://www.tutorialspoint.com/css/css_syntax.htm>`_.
+
+    A CSS comprises of style rules that are interpreted by the browser and then applied to the corresponding elements in your document. A style rule is made of three parts −
+
+    - **Selector** − A selector is an HTML tag at which a style will be applied. This could be any tag like <h1> or <table> etc.
+    - **Property** - A property is a type of attribute of HTML tag. Put simply, all the HTML attributes are converted into CSS properties. They could be color, border etc.
+    - **Value** - Values are assigned to properties. For example, color property can have value either red or #F1F1F1 etc.
+
+    For instance, you can define a table border as follows :
+
+    .. code-block:: css
+
+        table{border :1px solid #C00;}
+
+    Here ``table`` is a type selector and ``border`` is a property and given value ``1px solid #C00`` is the value of that property.
+
+    The Class Selectors
+    --------------------
+
+    You can define style rules based on the class attribute of the elements. All the elements having that class will be formatted according to the defined rule.
+
+    .. code-block:: css
+
+        .black {
+           color: #000000;
+        }
+
+    How does this exercise work ?
+    ------------------------------
+
+    In this exercise, the student is asked to provide a small CSS code in which ``.alert`` elements font weight is bold and ``div.alert`` elements foreground color is red. The answer is checked as follows:
+
+    #. The CSS code written by the student is saved in a temporary file.
+    #. The file is then checked using the W3C CSS-Validator to provide feedback on syntax errors.
+    #. Once the CSS code is valid, it is semantically checked by comparing each property/value/priority set for each selector in the CSS code using the ``cssutils`` Python library.
+
+    This exercise is designed only to tell the students if his submission is correct. It will not give any clue on how to solve any issue. This can be done by doing additionnal comparisons on the parsed CSS object.
+environment: htmlcss
+evaluate: best
+groups: false
+limits:
+    memory: '512'
+    output: '2'
+    time: '30'
+name: CSS .class Selector
+network_grading: false
+order: 1
+problems:
+    thecode:
+        language: css
+        name: Defining CSS rules using a .class selector
+        type: code
+        header: Consider you have ``div`` and ``span`` elements that both can be of
+            class ``alert``. All ``class="alert"`` elements should have bold font
+            weight and all ``<div class="alert">`` (and only them) should have red
+            foreground color. Write the CSS rules below.
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

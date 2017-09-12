@@ -1,0 +1,153 @@
+accessible: true
+author: Anthony Gégo
+context: ''
+environment: mcq
+evaluate: best
+groups: false
+limits:
+    time: '30'
+    memory: '100'
+    output: '2'
+name: 'Day 4 - Object oriented programming : Part 2'
+network_grading: false
+order: 12
+problems:
+    mcq1:
+        choices:
+        -   valid: true
+            text: No, ``Diamond`` shouldn't inherit from ``Square``.
+        -   text: No, ``Pentagon`` should inherit from ``Quadrilateral``.
+        -   feedback: A rectangle is, indeed, a trapeze, but also a quadrilateral.
+                Even if this relation is not 'optimal', it is correct.
+            text: No, this model is erroneous, ``Rectangle`` should inherit from ``Trapeze``
+        -   text: Yes.
+        limit: 0
+        name: Inheritance
+        header: |-
+            According to geometrical properties, does this model make sense ?
+
+            .. code-block:: python
+
+                class Figure(object):
+                    pass
+                class Quadrilateral(Figure):
+                    pass
+                class Trapeze(Quadrilateral):
+                    pass
+                class Rectangle(Quadrilateral):
+                    pass
+                class Square(Rectangle):
+                    pass
+                class Diamond(Square):
+                    pass
+                class Triangle(Figure):
+                    pass
+                class Pentagon(Figure):
+                    pass
+        type: multiple-choice
+    mcq2:
+        choices:
+        -   text: |-
+                .. code::
+
+                    width:  5 height:  5
+            valid: true
+        -   text: |-
+                .. code::
+
+                    width:  5
+        type: multiple-choice
+        limit: 0
+        header: |-
+            Consider the following piece of code :
+
+            .. code-block:: python
+
+                class Rectangle(object):
+                    def __init__(self, w, h):
+                        self._w = w
+                        self._h = h
+
+                    def printAttr(self):
+                        print "width: ", self._w, "height: ", self._h
+
+                class Square(Rectangle):
+                    def __init__(self, w):
+                        super(Square, self).__init__(w,w)
+
+                    def printAttr(self):
+                        print "width: ", self._w
+
+                s = Square(5)
+                super(Square, s).printAttr()
+
+            What will be displayed in the Python console ?
+        name: Inheritance and super keyword
+    mcq3:
+        header: Interfaces don't exist in Python. Abstract classes are used instead.
+            How would you implement a class Comparable with an abstract method ``compareTo``
+            ?
+        choices:
+        -   valid: true
+            text: |-
+                .. code-block:: python
+
+                    class Comparable:
+                        def compareTo(self, o):
+                            raise NotImplementedError("Abstract method")
+        -   text: |-
+                .. code-block:: python
+
+                    class Comparable:
+                        def compareTo(self, o):
+                            pass
+            feedback: With this implementation, ``compareTo`` need not to be implemented
+                by inheriting classes...
+        -   text: |-
+                .. code-block:: python
+
+                    class Comparable:
+                        def compareTo(self, o)
+        name: Abstract classes
+        limit: 0
+        type: multiple-choice
+    mcq4:
+        choices:
+        -   text: Jimmy replaced the simple underscore by double underscore, making
+                class attributes hidden from outside.
+            valid: true
+        -   feedback: This has absolutely no impact.
+            text: Jimmy didn't copied the last and needed line ``super(Square, s).printAttr()``.
+        -   text: Jimmy must have mixed up spaces and tabulations, breaking Steve's
+                code !
+        limit: 0
+        name: Class attributes
+        type: multiple-choice
+        header: |-
+            Jimmy is the perfect cheater and copied the code of Steve from Question 2.
+
+            .. code-block:: python
+
+                class Rectangle(object):
+                    def __init__(self, w, h):
+                        self.__w = w
+                        self.__h = h
+
+                    def printAttr(self):
+                        print "width: ", self.__w, "height: ", self.__h
+
+                class Square(Rectangle):
+                    def __init__(self, w):
+                        super(Square, self).__init__(w,w)
+
+                    def printAttr(self):
+                        print "width: ", self.__w
+
+                s = Square(5)
+
+            But when Steve wants calls ``s.printAttr()``, everything works as expected, as Jimmy can't get the thing working. How could you explain that ?
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

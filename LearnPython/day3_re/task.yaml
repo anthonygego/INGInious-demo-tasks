@@ -1,0 +1,293 @@
+accessible: true
+author: Guillaume Derval, Anthony Gégo
+context: ''
+environment: mcq
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: 'Day 3 - Standard library : Part 2'
+network_grading: false
+order: 10
+problems:
+    re1:
+        type: multiple-choice
+        header: |+
+            Which regex makes the following code work?
+
+            .. code-block:: python
+
+                def get_email_parts(email):
+                    """ Returns a tuple (localaddr, serverhost, gtld), separating the given email.
+                          >> get_email_parts("test@somewhere.be")
+                          ("test", "somewhere", "be")
+                    """
+                    regex = "..."
+                    return re.match(regex, email).group('la', 'sh', 'tld')
+
+        choices:
+        -   text: '``r''([a-zA-Z_-]+)@([a-zA-Z_-]+).([a-zA-Z_-]+)''``'
+        -   text: '``r''^([a-zA-Z0-9_\-]+)@([a-zA-Z0-9_\-]+).([a-zA-Z0-9_\-]+)``'
+        -   text: '``r''^(?P<la>[a-zA-Z0-9_\-]+)@(?P<sh>[a-zA-Z0-9_\-]+).(?P<tld>[a-zA-Z0-9_\-]+)$''``'
+        -   text: '``r''^(?P<la>[a-zA-Z0-9_\-]+)@(?P<sh>[a-zA-Z0-9_\-]+).(?P<tld>[a-zA-Z0-9_\-]+)$''``'
+        -   valid: true
+            text: '``r''^(?P<la>[a-zA-Z0-9_\-\.]+)@(?P<sh>[a-zA-Z0-9_\-\.]+).(?P<tld>[a-zA-Z0-9_\-\.]+)$''``'
+        -   text: '``r''(?P<la>[a-zA-Z0-9_\-\.]+)@(?P<sh>[a-zA-Z0-9_\-\.]+).(?P<tld>[a-zA-Z0-9_\-\.]+)''``'
+        name: Regular expressions
+        limit: 0
+    random:
+        name: Random numbers & regular expressions
+        choices:
+        -   text: '``^([0-9]+) ([0-9]+) ([0-9]+)$``'
+            valid: true
+        -   text: '``^([0-9]+)$``'
+        -   text: '``^([0-9 ]+)$``'
+        -   text: '``^([0-9]+) 5715 8578$``'
+            valid: true
+        -   text: '``^([0-9]+) 5715 ([0-9]+)$``'
+            valid: true
+        -   valid: true
+            text: '``^([0-9]+) ([0-9]+) 8578$``'
+        -   text: '``^8130 ([0-9]+) ([0-9]+)$``'
+        multiple: true
+        limit: 0
+        header: |-
+            Select all the regexps that will match the output of the following code:
+
+            .. code-block:: python
+
+                import random
+                print random.randint(1, 10000),
+                random.seed(10)
+                print random.randint(1, 10000),
+                print random.randint(1, 20000)
+
+            Given that, when the code was first executed, it returned:
+
+            .. code-block::
+
+                8130 5715 8578
+        type: multiple-choice
+    date:
+        choices:
+        -   text: '``01/03/2015 20:02:02 % Monday 01 Mar 15``'
+        -   valid: true
+            text: '``01/03/2015 20:02:02 %% Monday 01 Mar 15``'
+        -   valid: true
+            text: '``%d/%m/%Y %H:%M:%S %% %A %d %b %y``'
+        -   text: '``%d/%m/%Y %H:%M:%S % %A %d %b %y``'
+        -   text: '``%d/%m/%y %H:%M:%S %% %A %d %b %Y``'
+        -   text: '``%d/%M/%y %H:%m:%S %% %A %d %b %Y``'
+        -   text: '``%d/%M/%y %H:%m:%S %% %a %d %b %Y``'
+        type: multiple-choice
+        header: |-
+            What should you give to strftime in order to print something like
+            ``01/03/2015 20:02:02 % Monday 01 Mar 15``
+            if we are the Monday 1st March 2015 at 20 hour 02 minutes 02 seconds?
+        multiple: true
+        limit: 0
+        name: Date
+    itertools:
+        type: multiple-choice
+        choices:
+        -   text: '[0, 5, 12, 21, 0, 9, 20, 33]'
+            valid: true
+        -   text: '[5, 12, 21, 0, 9, 20, 33, 0]'
+        -   text: '[0, 5, 12, 21, 0, 9, 20, 33, 0, 13, 28, 45]'
+        -   text: '[5, 12, 21, 0, 9, 20, 33, 0, 13, 28, 45, 0]'
+        -   text: The code will never return since itertools.count is infinite
+        limit: 0
+        header: |-
+            What is the return value of the following line?
+
+            .. code-block:: python
+
+                list(itertools.islice(itertools.imap((lambda x,y : x*y), itertools.count(), itertools.cycle([0, 1, 2, 3])), 4, 12))
+        name: Itertools
+    mcq5:
+        choices:
+        -   text: The default compression type is set to ``zipfile.ZIP_DEFLATED``
+                and should be ``zipfile.ZIP_STORED`` to produce a compressed zip file.
+        -   text: The default compression type is set to ``zipfile.ZIP_STORED`` and
+                should be ``zipfile.ZIP_DEFLATED`` to produce a compressed zip file.
+            valid: true
+        -   text: The ``write`` function put data into the zip file. Once all the
+                files are added, the file must be compressed.
+        type: multiple-choice
+        name: Zip files
+        limit: 0
+        header: |-
+            John is trying to zip his heavy source code using ``zipfile`` module but can't see any compression effect. Here is his code :
+
+            .. code-block:: python
+
+              import zipfile
+              import os
+
+              zip=zipfile.ZipFile("test.zip","w")
+
+              for name in os.listdir("/src"):
+                  zip.write(name, os.path.basename(name))
+
+              file.close()
+
+            How could you explain that ?
+    mcq6:
+        name: Profiling
+        choices:
+        -   valid: true
+            text: |-
+                .. code-block::
+
+                  timeit:
+                  world !
+                  hello
+                  0.000614458105515
+        -   text: |-
+                .. code-block::
+
+                  timeit:
+                  hello world !
+                  0.000614458105515
+        -   text: |-
+                .. code-block::
+
+                  timeit:
+                  hello
+                  world !
+                  0.000614458105515
+        header: |-
+            Steve is interested in profiling and learned about the existence of ``timeit`` module but he's quite confused about the module usage. He has written this test code :
+
+            .. code-block:: python
+
+              import timeit
+
+              t = timeit.Timer("print 'hello '", "print 'world !'")
+
+              print 'timeit :'
+              print t.timeit(1)
+
+            Which kind of output will this code print ?
+        limit: 0
+        type: multiple-choice
+    mcq7:
+        choices:
+        -   valid: true
+            text: The ``testmod`` function compares the exact output without any cast,
+                so `10` is different from ``10.0``.
+        -   text: |-
+                This syntax is incorrect, Bill should have written :
+
+                .. code-block:: python
+
+                    def average(values):
+                        """ Computes the average of the list
+
+                        >>> average([0, 20])
+                        10
+                        >>> average([0, 40])
+                        20
+                        """
+                        return sum(values, 0.0) / len(values)
+        -   text: The ``doctest`` module should be imported before function definition.
+        name: Embedded tests
+        type: multiple-choice
+        header: |-
+            Bill has written tests for his function with the ``doctest`` module :
+
+            .. code-block:: python
+
+              def average(values):
+                  """ Computes the average of the list
+
+                  >>> print average([0, 20])
+                  10
+                  >>> print average([0, 40])
+                  20
+                  """
+                  return sum(values, 0.0) / len(values)
+
+              import doctest
+              doctest.testmod()
+
+            But the two tests failed. He's pretty sure of function results anyway. What is going wrong ?
+        limit: 0
+    mcq8:
+        limit: 0
+        choices:
+        -   valid: true
+            text: This will open all the files in ``tests`` folder, consider their
+                content as docstring, and merge all the tests contained in one unit
+                test suite that will be run.
+        -   text: This will open all the modules contained in ``tests`` folder, parse
+                and merge their doctests, and then execute them in one unit test suite.
+        name: Advanced testing
+        header: |-
+            What will this code do ?
+
+            .. code-block:: python
+
+              import unittest
+              import doctest
+              import os
+
+              suite=unittest.TestSuite()
+
+              for testfile in os.listdir("/tests"):
+                  suite.addTest(doctest.DocFileSuite(testfile))
+
+              runner=unittest.TextTestRunner()
+              runner.run(suite)
+        type: multiple-choice
+    mcq9:
+        type: multiple-choice
+        choices:
+        -   text: Kevin should have wrongly read the function specifications. Obviously,
+                he got this error because ``a`` is not a list but an integer array.
+            valid: true
+        -   text: '``a`` is not defined and Python don''t understand what Kevin does,
+                so it raises an incorrect exception.'
+        name: Arrays
+        limit: 0
+        header: |-
+            Kevin wants to change the value of a list ``a`` returned by a function and got the following exception :
+
+            .. code-block::
+
+             >>> a[2] = 'b'
+             Traceback (most recent call last):
+               File "<stdin>", line 1, in <module>
+             TypeError: an integer is required
+
+            He's however pretty sure anything fits in a list in Python. Why can't he replace this element ?
+    mcq10:
+        choices:
+        -   text: '``steve.firstname``'
+            valid: true
+        -   valid: true
+            text: '``steve[0]``'
+        -   text: '``steve[0:2][0]``'
+            valid: true
+        -   text: '``steve[0:2].firstname``'
+        type: multiple-choice
+        name: Named tuples
+        header: |-
+            Consider the following code :
+
+            .. code-block:: python
+
+              from collections import namedtuple
+              Person=namedtuple("Person", "firstname lastname")
+              steve=Person("Steve", "Ballmer")
+
+            Check all the valid ways to access "Steve" member.
+        multiple: true
+        limit: 0
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

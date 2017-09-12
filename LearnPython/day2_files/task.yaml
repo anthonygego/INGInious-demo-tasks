@@ -1,0 +1,66 @@
+accessible: true
+author: Anthony Gégo
+context: ''
+environment: default
+groups: false
+limits:
+    memory: '100'
+    output: '2'
+    time: '30'
+name: Day 2 - Playing with files
+order: 8
+problems:
+    addlines:
+        header: |-
+            Write a small program that will open a file whose filename is given by the variable ``filename`` and prepend each line by its line number, starting from 1. For reading purposes, 4 columns will be reserved for the line number which will be right-aligned, then one space will separate the line number from the first character of the line.
+
+            Example :
+
+            .. code-block::
+
+                 1 This is the first line.
+                 2 This is the second line.
+                   ...
+                10 This is the tenth line.
+                   ...
+              1000 This is the thousandth line.
+        name: Adding line numbers
+        language: python
+        type: code
+    pickling:
+        type: code
+        language: python
+        header: |-
+            Jimmy learned that his high school stores student grades in a Python list of the following structure :
+
+            .. code-block:: python
+
+                [
+                    {
+                        "name": "Jimmy",
+                        "grades":
+                         {
+                              "French": 10,
+                              "English": 14,
+                              "Math": 8,
+                              "History": 12,
+                              "Science": 6
+                        }
+                    },
+                    ...,
+                    {
+                        "name": "Jennifer",
+                        "grades":
+                         {
+                              "French": 18,
+                              "English": 18,
+                              "Math": 16,
+                              "History": 15,
+                              "Science": 16
+                        }
+                    }
+                ]
+
+            Jimmy ask you to write a Python code that will open the file ``classroom.pickle`` containing these information and change his grades under 10 to 10 or more. You'll then save these information back in the pickle.
+        name: Pickling
+weight: 1.0

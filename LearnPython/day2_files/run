@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# Check first exercise
+parsetemplate -o readfile.py read.py
+parsetemplate -o picklefile.py pickling.py
+
+
+exercices_ok=0
+nb_exercices=2
+
+python readfile.py text30.txt > out.txt
+result=$(diff --ignore-all-space -r out.txt out30.txt)
+
+if [ -z "$result" ]; then
+    feedback --id addlines --feedback "Well done !"
+    exercices_ok=$(($exercices_ok + 1))
+else
+    feedback --id addlines --feedback "Your code gave an incorrect output. Check text alignment or that you don't print twice a newline (or an extra newline)."
+fi
+
+# Check second exercise   
+result=$(python picklefile.py)
+
+if [[ "$result" = "True" ]]; then
+    feedback --id pickling --feedback "Well done !"
+    exercices_ok=$(($exercices_ok + 1))
+else
+    feedback --id pickling --feedback "Your code didn't work !"
+fi
+
+amount_done=$(($exercices_ok*100/$nb_exercices))
+if [[ $exercices_ok -eq $nb_exercices ]]; then
+    feedback --result success --feedback "Well done !" --grade  $amount_done
+else
+    feedback --result failed --feedback "There are some error(s) in your answers" --grade  $amount_done
+fi
+    

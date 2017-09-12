@@ -1,0 +1,262 @@
+accessible: true
+author: Anthony Gégo
+context: ''
+environment: mcq
+evaluate: best
+groups: false
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: 'Day 4 - Object oriented programming : Part 1'
+network_grading: false
+order: 11
+problems:
+    mcq1:
+        choices:
+        -   valid: true
+            text: Strings
+        -   text: Dictionaries
+            valid: true
+        -   valid: true
+            text: Functions
+        -   valid: true
+            text: Integers
+        -   valid: true
+            text: Lists
+        multiple: true
+        name: Objects in Python
+        header: Check all Python types that are objects.
+        limit: 0
+        type: multiple-choice
+    mcq2:
+        choices:
+        -   valid: true
+            text: |-
+                .. code-block:: python
+
+                    print {1:41, 2:42} == {1:41, 2:42}
+        -   text: |-
+                .. code-block:: python
+
+                    print {1:41, 2:42} is {1:41, 2:42}
+        -   valid: true
+            text: |-
+                .. code-block:: python
+
+                    a = {1:41, 2:42}
+                    print a == a
+        type: multiple-choice
+        limit: 0
+        name: References
+        header: Check all the comparisons that will return ``true``.
+    mcq3:
+        header: |-
+            Steve has written the following code :
+
+            .. code-block:: python
+
+               basic = ["cpu", "ram", "hdd"]
+               gaming = basic
+               gaming.extend(["wifi", "videocard", "soundcard", "keyboard", "screen", "mouse"])
+               server = basic
+               server.extend(["ethernet"])
+
+            When Steve prints the 3 lists, they all contains all the elements. Could you explain why ?
+        choices:
+        -   valid: true
+            text: The assignments ``gaming = basic`` and ``server = basic`` are reference-assignment,
+                the object in memory remains the same.
+        -   text: The ``server = basic`` assignment should have been done before extending
+                ``gaming``.
+        -   text: The correct syntax is ``gaming = basic.extend(...)`` and ``server
+                = basic.extend(...)``
+        type: multiple-choice
+        name: Multiple references
+        limit: 0
+    mcq4:
+        choices:
+        -   valid: true
+            text: |-
+                .. code::
+
+                  test test2 var
+        -   text: |-
+                .. code::
+
+                  var test2 var
+        -   text: |-
+                .. code::
+
+                  test test2 test2
+        -   text: |-
+                .. code::
+
+                  var test2 test2
+        type: multiple-choice
+        limit: 0
+        name: Instances namespace
+        header: |-
+            Consider the following code :
+
+            .. code-block:: python
+
+              class MyClass(object):
+                  pass
+
+              a = MyClass()
+              a.var = "test"
+              MyClass.var = "var"
+              b = MyClass()
+              b.var = "test2"
+              c = MyClass()
+
+              print a.var, b.var, c.var
+
+            What will this code print ?
+    mcq5:
+        type: multiple-choice
+        choices:
+        -   text: All class methods must take at least the ``self`` arguments.
+            valid: true
+        -   text: The correct syntax is ``a.printAttr`` and not ``a.printAttr()``.
+        limit: 0
+        header: |-
+            John is discovering object-oriented programming under Python and wrote this code :
+
+            .. code-block:: python
+
+                class MyClass(object):
+                    attr = "Attribute"
+                    def printAttr():
+                        print self.attr
+
+                a = MyClass()
+                a.attr = "My attribute"
+                a.printAttr()
+
+            He expected to see
+
+            .. code::
+
+              My attribute
+
+            on his screen, but he got :
+
+            .. code::
+
+              Traceback (most recent call last):
+                File "<stdin>", line 1, in <module>
+              TypeError: printAttr() takes no arguments (1 given)
+
+            What did John do wrong ?
+        name: Methods
+    mcq6:
+        name: Private attributes
+        choices:
+        -   valid: true
+            text: '``Attribute``'
+        -   text: '``My own attribute``'
+        -   text: The code won't be executed since ``__attr`` is a private attribute
+                that can't be accessed.
+        header: |-
+            Consider the following piece of code :
+
+            .. code-block:: python
+
+                class MyClass(object):
+                    __attr = "Attribute"
+                    def printAttr(self):
+                        print self.__attr
+
+                a = MyClass()
+                a.__attr = "My own attribute"
+                a.printAttr()
+
+            What will be displayed at execution ?
+        limit: 0
+        type: multiple-choice
+    mcq7:
+        type: multiple-choice
+        choices:
+        -   text: 'Yes'
+            valid: true
+        -   text: 'No'
+        header: Consider a class `Person` with a method ``setname(self, name)`` and
+            an instance ``p``. Is the notation ``p.setname("John")`` equivalent to
+            ``Person.setname(p, "John")`` ?
+        limit: 0
+        name: Binding
+    mcq8:
+        choices:
+        -   text: Steve forgot the ``self`` argument in his ``sqr`` function definition.
+        -   valid: true
+            text: Steve didn't mention that ``sqr`` is a static function.
+        -   text: Static function ``sqr`` must be called from an instance of the class
+                and not the class itself.
+        name: Static methods
+        limit: 0
+        type: multiple-choice
+        header: |-
+            Steve wants to define a class ``Math`` with some useful static methods. He started by exploring how static methods work on Python but fail to launch his code :
+
+            .. code-block::  python
+
+                class Math(object):
+                    def sqr(x):
+                        return x**2
+
+                Math.sqr(2)
+
+            What is Steve doing wrong ?
+    mcq9:
+        choices:
+        -   text: The ``sqr`` method still has no ``self`` argument in its signature.
+        -   text: Steve shouldn't have written ``staticmethod`` but ``classmethod``.
+            valid: true
+        -   text: The first argument of ``sqr`` method should be ``self``.
+        header: |-
+            Steve has modified a little bit his ``Math`` class but still have problems to run his little piece of code :
+
+            .. code-block:: python
+
+                class Math(object):
+                    r=2
+                    def sqr(cls, x):
+                        return x**cls.r
+
+                    sqr = staticmethod(sqr)
+
+                Math.sqr(2)
+
+            Can you help Steve ?
+        type: multiple-choice
+        limit: 0
+        name: Class methods
+    mcq10:
+        choices:
+        -   text: |-
+                .. code::
+
+                  <__main__.A object at 0x0000000002302390>
+        -   text: This code will crash.
+            valid: true
+        type: multiple-choice
+        limit: 0
+        name: Old/New style classes
+        header: |-
+            Consider the following code :
+
+            .. code-block:: python
+
+                class A:
+                    pass
+
+                print A().__repr__()
+
+            Which kind of output will Python print ?
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+weight: 1.0

@@ -1,0 +1,33 @@
+accessible: true
+author: Guillaume Derval
+context: ''
+environment: default
+groups: false
+limits:
+    memory: '100'
+    output: '2'
+    time: '30'
+name: Day 1 - Strings
+problems:
+    charlie:
+        name: Find Charlie
+        language: python
+        header: |-
+            Write the function ``find_charlie(a_string)``, which takes as input a non-empty string.
+            It should return the position of the substring ``Charlie`` in the string if it is present, or \\(-1\\).
+
+            (NB: there will be maximum one ``Charlie`` in the string, and it is ``Charlie`` with an uppercase ``C``.)
+        type: code
+    spotted:
+        header: |-
+            Now that you have found Charlie, write a new function ``spot_charlie(a_string)``, using the function ``find_charlie(a_string)``, that adds the string ``SPOT`` juste before and just after Charlie, and returns the new string.
+
+            For example, given the string ``Where is Bryan? He is in the kitchen, with Charlie.``, ``spot_charlie`` should return ``Where is Bryan? He is in the kitchen, with SPOTCharlieSPOT.``.
+
+
+            (NB: there will be maximum one ``Charlie`` in the string, and it is ``Charlie`` with an uppercase ``C``.)
+        language: python
+        type: code
+        name: Spot Charlie
+weight: 1.0
+order: 2

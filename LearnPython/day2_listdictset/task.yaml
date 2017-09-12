@@ -1,0 +1,41 @@
+accessible: true
+author: Anthony Gégo
+context: ''
+environment: default
+groups: false
+limits:
+    memory: '100'
+    output: '2'
+    time: '30'
+name: Day 2 - Practical data structures
+order: 7
+problems:
+    sets:
+        language: python
+        name: Removing duplicates
+        type: code
+        header: Write a function ``remove_duplicates(the_list)`` that will return
+            a new list without any duplicates (order doesn't matter).
+    sorted:
+        header: |-
+            You are given a list containing dictionaries that represent articles information and you are interested in sorting the list according to the product price. The given list has the following structure :
+
+            .. code-block:: python
+
+                [
+                    {
+                        name: "Keyboard",
+                        price: 10.5
+                    },
+                    ...
+                    {
+                        name: "Motherboard",
+                        price: 70.4
+                    }
+                ]
+
+            Write a small function ``sorted_by_price(the_list)`` that will return the list sorted by articles prices.
+        language: python
+        type: code
+        name: Sorting
+weight: 1.0
