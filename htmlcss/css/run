@@ -52,9 +52,9 @@ def css_to_dict(css):
 rules = css_to_dict(css)
 expected_rules = css_to_dict(expected_css)
 
+feedback.set_global_result("success")
+
 if not rules == expected_rules:
     feedback.set_global_result("failed")
     feedback.set_global_feedback("Your CSS code is valid but it does not respect the specs.")
     exit(0)
-    
-feedback.set_global_result("success")
