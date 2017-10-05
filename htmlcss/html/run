@@ -30,8 +30,8 @@ parser = HTMLExpander()
 parser.feed(data)
 answer = parser.get_result()
 
+feedback.set_global_result("success")
+
 if not answer == expected_answer:
     feedback.set_global_result("failed")
     feedback.set_global_feedback("Your HTML code is valid but it does not respect the specs.")
-
-feedback.set_global_result("success")
