@@ -1,4 +1,5 @@
 name: '[TUTO] The INGInious tutorial'
+allow_preview: true
 admins:
 - superadmin
 

@@ -1,13 +1,4 @@
-accessible: true
 name: '[HTML/CSS] HTML/CSS demo'
+allow_preview: true
 admins:
-- ''
-tutors: []
-groups_student_choice: false
-use_classrooms: true
-allow_unregister: true
-registration: true
-registration_password: null
-registration_ac: null
-registration_ac_list:
-- ''
+- superadmin
